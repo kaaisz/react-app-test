@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>React Test App 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.6.3/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.6.3/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    class App extends React.Component{
+      /*
+        空のデータを定義 - React.Componentを継承してコンポーネントを作成する場合は、
+        constructor()内で初期値を与えることが可能
+        (this.stateに初期値を代入する前に、super()を呼び出す)
+      */
+      constructor(){
+        super();
+        this.state = {
+          input:'',
+          todos:[],
+        }
+      }
+      addToDo(){
+        //this.stateをtodosとinputに分ける
+        let{ todos, input } = this.state;
+        //inputに入力した内容をtodosのarrayに追加
+        todos.push(input)
+        //todosのstate(状態)をsetStateにより変化させる
+        this.setState({todos});
+      }
+      // 描画する
+      render(){
+        return(
+          <div>
+            <ul>
+              {this.state.todos.map(todo => {
+                //todoの内容をlist化してreturnする
+                return(<li key={todo}>{todo}</li>)
+              })}
+            </ul>
+            <input value={this.state.input} onChange={(event)=>this.setState({input:event.target.value})} type="text"/>
+              <button onClick={()=>this.addToDo()}>Add</button>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<App/>, document.getElementById("app"))
+  </script>
+</body>
+</html>
