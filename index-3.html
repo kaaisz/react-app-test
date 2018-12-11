@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.6.3/umd/react-dom.production.min.js"></script>
 </head>
 
-<body>
+<body style="font-family:sans-serif">
   <div id="app"></div>
   <script type="text/babel">
     ////---------------------------------////
@@ -39,7 +39,7 @@
       render(){
         return(
           <div>
-            <p>This is GrandChildComponent - {this.state.myState1} {`&`} {this.state.myState2}</p>
+            <p>This is GrandChildComponent<br/>{this.state.myState1} {`&`} {this.state.myState2}</p>
           </div>
         )
       }
@@ -65,7 +65,7 @@
       render(){
         return(
           <div>
-            <p>This is ChildComponent - {this.state.myState1} {`&`} {this.state.myState2}</p>
+            <p>This is ChildComponent<br/>{this.state.myState1} {`&`} {this.state.myState2}</p>
             <GrandChildComponent updateState={this.updateState.bind(this)} />
           </div>
         )
@@ -87,7 +87,7 @@
       render(){
         return(
           <div>
-            <p>This is ParentComponent - {this.state.myState1} {`&`} {this.state.myState2}</p>
+            <p>This is ParentComponent<br/>{this.state.myState1} {`&`} {this.state.myState2}</p>
             <ChildComponent updateState={this.updateState.bind(this)}/>
           </div>
         )
