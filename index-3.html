@@ -51,8 +51,8 @@
         
         // そのまま値を渡したいからNULLにしてるの？
         this.state = {
-          myState1 : NULL,
-          myState2 : NULL,
+          myState1 : null,
+          myState2 : null,
         };
       }
 
@@ -66,16 +66,29 @@
         return(
           <div>
             <p>This is ChildComponent - {this.state.myState1} {`&`} {this.state.myState2}</p>
+            <GrandChildComponent updateState={this.updateState.bind(this)} />
           </div>
         )
       }
     }
 
-    class ParentComponent extends React.component{
+    class ParentComponent extends React.Component{
+      constructor(props){
+        super(props);
+        this.state = {
+          myState1 : null,
+          myState2 : null,
+        };
+      }
+
+      updateState(state){
+        this.setState(state);
+      }
       render(){
         return(
           <div>
-            <p>This is ParentComponent</p>
+            <p>This is ParentComponent - {this.state.myState1} {`&`} {this.state.myState2}</p>
+            <ChildComponent updateState={this.updateState.bind(this)}/>
           </div>
         )
       }
