@@ -42,8 +42,10 @@
       render(){
         return(
           <div>
-            <p>ParentComponent</p>
-            <ChildComponent/>
+            {/* このthis.props.myPropってどこから来てるんだっけ(renderのmyPropだというのはなんとなくわかる) */}
+            <p>ParentComponent : {this.props.myProp}</p>
+            {/* これはChildComponentにmyPropとして{this.props.myProp}を渡すと理解 */}
+            <ChildComponent myProp={this.props.myProp}/>
             <GrandChildComponent/>
           </div>
         )
