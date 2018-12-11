@@ -46,10 +46,26 @@
     }
 
     class ChildComponent extends React.Component{
+      constructor(props){
+        super(props);
+        
+        // そのまま値を渡したいからNULLにしてるの？
+        this.state = {
+          myState1 : NULL,
+          myState2 : NULL,
+        };
+      }
+
+      updateState(state){
+        this.setState(state);
+        //親コンポーネントを更新
+        this.props.updateState(state);
+      }
+
       render(){
         return(
           <div>
-            <p>This is ChildComponent</p>
+            <p>This is ChildComponent - {this.state.myState1} {`&`} {this.state.myState2}</p>
           </div>
         )
       }
