@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bucket Relay Sample</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.6.3/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.6.3/umd/react-dom.production.min.js"></script>
+</head>
+
+<body style="font-family:sans-serif">
+  <div id="app"></div>
+  <script type="text/babel">
+    ////---------------------------------////
+    // ( GrandChild -> ) Child -> Parent
+    // 子コンポーネントがある = 親コンポーネントもある
+    // 子コンポーネントが親コンポーネントのstateを変更すれば情報が更新される
+    ////---------------------------------////
+
+    // 1. GrandChildComponent
+    class GrandChildComponent extends React.Component{
+      // ↓ これってconstructorって名前の、propsが引数になった関数なの？
+      constructor(props){
+        super(props);
+
+        // define init state
+        this.state = {
+          myState1 : '🎄🎅Merry Christmas🤶🎄',
+          myState2 : '⛩🎍Happy New Year🎍⛩',
+        };
+
+        //update state on ChildComponent
+        this.props.updateState(this.state);
+      }
+
+      render(){
+        return(
+          <div>
+            <p>This is GrandChildComponent<br/>{this.state.myState1} {`&`} {this.state.myState2}</p>
+          </div>
+        )
+      }
+    }
+
+    class ChildComponent extends React.Component{
+      constructor(props){
+        super(props);
+        
+        // そのまま値を渡したいからNULLにしてるの？
+        this.state = {
+          myState1 : null,
+          myState2 : null,
+        };
+      }
+
+      updateState(state){
+        this.setState(state);
+        //親コンポーネントを更新
+        this.props.updateState(state);
+      }
+
+      render(){
+        return(
+          <div>
+            <p>This is ChildComponent<br/>{this.state.myState1} {`&`} {this.state.myState2}</p>
+            <GrandChildComponent updateState={this.updateState.bind(this)} />
+          </div>
+        )
+      }
+    }
+
+    class ParentComponent extends React.Component{
+      constructor(props){
+        super(props);
+        this.state = {
+          myState1 : null,
+          myState2 : null,
+        };
+      }
+
+      updateState(state){
+        this.setState(state);
+      }
+      render(){
+        return(
+          <div>
+            <p>This is ParentComponent<br/>{this.state.myState1} {`&`} {this.state.myState2}</p>
+            <ChildComponent updateState={this.updateState.bind(this)}/>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <ParentComponent />, 
+      document.querySelector('#app')
+    )
+    //"Super expression must either be null or a function, not undefined"
+  </script>
+</body>
+</html>
