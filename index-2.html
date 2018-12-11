@@ -31,7 +31,8 @@
       render(){
         return(
           <div>
-            <p>ChildComponent</p>
+            <p>ChildComponent : {this.props.myProp}</p>
+            <GrandChildComponent myProp={this.props.myProp} />
           </div>
         )
       }
@@ -46,7 +47,6 @@
             <p>ParentComponent : {this.props.myProp}</p>
             {/* これはChildComponentにmyPropとして{this.props.myProp}を渡すと理解 */}
             <ChildComponent myProp={this.props.myProp}/>
-            <GrandChildComponent/>
           </div>
         )
       }
