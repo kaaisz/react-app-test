@@ -23,6 +23,7 @@
     // 1. GrandChildComponent
     class GrandChildComponent extends React.Component{
       // ↓ これってconstructorって名前の、propsが引数になった関数なの？
+      // propsをstateの初期値として利用する場合には、constructorの引数に(props)を指定する
       constructor(props){
         super(props);
 
