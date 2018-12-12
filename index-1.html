@@ -44,6 +44,7 @@
                 return(<li key={todo}>{todo}</li>)
               })}
             </ul>
+            {/* valueは変化する要素 = state = constructorの中で定義したthis.state.inputとなる */}
             <input value={this.state.input} onChange={(event)=>this.setState({input:event.target.value})} type="text"/>
               <button onClick={()=>this.addToDo()}>Add</button>
           </div>
