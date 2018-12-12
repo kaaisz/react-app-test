@@ -57,7 +57,8 @@
 
     ReactDOM.render(
       // following code will appear on browser (like an App component rendering on route directory)
-      <ParentComponent myProp="🎄🎅Merry Christmas🤶🎄"/>,
+      // propsを与える時は、HTMLに属性値を指定するように行う
+      <ParentComponent myProp="🎄🎅Merry Christmas🤶🎄from parent component"/>,
       document.querySelector('#app')
     );
   </script>
